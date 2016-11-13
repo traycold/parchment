@@ -30,3 +30,43 @@ To build everything run the following:
 ```
 grunt
 ```
+How to include a story into single html file
+-----------------
+Create and serve from a webserver this html file:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Parchment</title>
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/parchment.debug.js"></script>
+	<script src="lib/zvm.debug.js"></script>
+	<link rel="stylesheet" href="lib/parchment.min.css">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<script>
+		parchment_options = {
+		    default_story: [ 'MYFILE.z5.js' ],
+        storyData: '..base64 encoded content of the story..'
+		};
+	</script>
+</head>
+<body>
+	<div id="about">
+		<h1>Parchment</h1>
+		<p>is an interpreter for Interactive Fiction. <a href="https://github.com/curiousdannii/parchment">Find out more.</a></p>
+		<noscript><p>Parchment requires Javascript. Please enable it in your browser.</p></noscript>
+	</div>
+	<div id="parchment" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+</body>
+</html>
+```
+Verify the file is correctly loaded.
+Install [inliner](https://github.com/remy/inliner) package:
+```
+npm install inliner
+```
+Launch it to create a single html file without dependencies to run the story:
+```
+./node_modules/.bin/inliner -m http://myserver/myfile.html > mystory.html
+```
