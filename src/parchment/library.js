@@ -319,7 +319,7 @@ Library = Object.subClass({
 		// Load the story file
 		actions = [
 			
-			$.ajax( storyfile[0], { dataType: 'binary', legacy: storyfile[1] } )
+			parchment_options.storyData?null:$.ajax( storyfile[0], { dataType: 'binary', legacy: storyfile[1] } )
 				// Attach the library for the launcher to use (yay for chaining)
 				.done( function( data, textStatus, jqXHR )
 				{
@@ -387,9 +387,18 @@ Library = Object.subClass({
 				//.fail( scripts_fail );
 		}
 		
-		// Add the launcher callback
-		$.when.apply( 1, actions )
-			.done( launch_callback );
+		if(parchment_options.storyData){
+			var jqXHR = {};
+			jqXHR.library = self;
+			jqXHR.vm = vm;
+			jqXHR.mode = 'base64';
+			file.process_binary_XHR(parchment_options.storyData,'',jqXHR);
+			launch_callback(['','',jqXHR]);
+		} else {
+			// Add the launcher callback
+			$.when.apply( 1, actions )
+				.done( launch_callback );
+		}
 	},
 	
 	// An event from a runner

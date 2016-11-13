@@ -369,7 +369,8 @@ window.file = {
 	array_to_text: array_to_text,
 	base64_decode: base64_decode,
 	base64_encode: base64_encode,
-	support: support
+	support: support,
+	process_binary_XHR: process_binary_XHR
 };
 ;;; window.file.download_to_array = download_to_array;
 

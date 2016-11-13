@@ -16,7 +16,7 @@ parchment.add_vm({
 	match: /(z[58]|zlb|(z|zcode.+)(blorb|blb))(.js)?$/i,
 	
 	// Files to load
-	files: DEBUG ? [ 'zvm.debug.js' ] : [ 'zvm.min.js' ],
+	files: DEBUG ? [ 'zvm.debug.js' ] : [  ],
 	
 	engine: 'ZVM'
 });
